@@ -4,7 +4,7 @@ import requests
 def get_recipes(ingredient_list):
     # Replace with the actual URL of your Flask API
     # url = "http://127.0.0.1:5000/rec"
-    url = "http://localhost:5000/rec"
+    url = "http://localhost:5000/rec" #not working for now
 
     # Convert the list of ingredients into a format that can be sent in a GET request
     params = {"ingredients": ','.join(ingredient_list)}
