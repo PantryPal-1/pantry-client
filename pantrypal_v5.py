@@ -4,9 +4,9 @@ import json
 import pandas as pd
 import re
 
-def get_recipes(ingredient_list):
+def get_recipes(ingredient_list, num_recipes):
     try:
-        url = "http://127.0.0.1:5000/rec"
+        url = f"http://127.0.0.1:5000/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
         data = {"ingredients": ingredient_list}
         data_json = json.dumps(data)
         headers = {'Content-type':'application/json'}
@@ -16,7 +16,7 @@ def get_recipes(ingredient_list):
         if response.status_code == 200:
             data = response.json()
             df = pd.DataFrame.from_dict(data)
-            return df.head(10)
+            return df.head(num_recipes)  # update this line to handle the number of recipes
         elif response.status_code == 403:
             st.warning("403 ERROR: Please start the API file.")
             return None
@@ -57,6 +57,8 @@ def main():
 
     ingredients = st.text_area("List of ingredients:", height=150)
 
+    num_recipes = st.number_input("Number of recipes to fetch:", min_value=1, value=5, step=1)  # add this line to let the user choose the number of recipes
+
     ingredient_list = []
 
     if st.button("Submit"):
@@ -84,7 +86,7 @@ def main():
 
     if ingredient_list:
         with st.spinner('Fetching recipes...'):
-            recipes = get_recipes(ingredient_list)
+            recipes = get_recipes(ingredient_list, num_recipes)  # update this line to handle the number of recipes
 
         if recipes is not None:
             if recipes.empty:
