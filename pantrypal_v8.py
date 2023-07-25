@@ -9,7 +9,7 @@ COMMON_INGREDIENTS = ["Tomato", "Cheese", "Bread", "Butter", "Egg", "Milk", "Oni
 
 def get_recipes(ingredient_list, num_recipes, filter_option):
     try:
-        url = f"http://127.0.0.1:4999/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
+        url = f"http://127.0.0.1:5000/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
         if filter_option == "Vegetarian":
             url += "&is_veg=true"
         elif filter_option == "Nut-free":
