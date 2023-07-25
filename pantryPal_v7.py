@@ -9,7 +9,7 @@ COMMON_INGREDIENTS = ["Tomato", "Cheese", "Bread", "Butter", "Egg", "Milk", "Oni
 
 def get_recipes(ingredient_list, num_recipes, filter_option):
     try:
-        url = f"http://127.0.0.1:4999/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
+        url = f"http://127.0.0.1:5000/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
         if filter_option == "vegetarian":
             url += "&is_veg=true"
         elif filter_option == "nut-free":
@@ -116,8 +116,13 @@ def main():
                 for i in recipes.index:
                     with st.expander(recipes['recipe_name'][i]):
                         st.write(f"URL: [Recipe Link]({recipes['recipe_urls'][i]})")
-                        st.write(f"Ingredients: {recipes['ingredients'][i]}")
+                        # Parse ingredients string into a list, strip extra characters, and format it
+                        ingredients_list = recipes['ingredients'][i].strip('[]').replace("'", "").split(', ')
+                        formatted_ingredients = "\n".join([f"{idx+1}. {ing.strip()}" for idx, ing in enumerate(ingredients_list)])
+                        st.markdown(f"**Ingredients:**\n{formatted_ingredients}")
                 st.success("Fetched recipes successfully!")
+
+
         else:
             st.error("An error occurred while fetching recipes.")
 
