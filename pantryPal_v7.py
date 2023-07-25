@@ -9,12 +9,13 @@ COMMON_INGREDIENTS = ["Tomato", "Cheese", "Bread", "Butter", "Egg", "Milk", "Oni
 
 def get_recipes(ingredient_list, num_recipes, filter_option):
     try:
-        url = f"http://127.0.0.1:5000/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
+        url = f"http://127.0.0.1:4999/rec?use_rec=true&n={num_recipes}"  # update the URL to handle the number of recipes
         if filter_option == "vegetarian":
             url += "&is_veg=true"
-        elif filter_option == "nut-free":
+        elif filter_option == "Nut-free":
             url += "&is_nut_free=true"
-
+        print(filter_option, flush=True)
+        print(url, flush=True)
         data = {"ingredients": ingredient_list}
         data_json = json.dumps(data)
         headers = {'Content-type':'application/json'}
