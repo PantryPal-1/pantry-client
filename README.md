@@ -17,6 +17,7 @@ Get instant recipe recommendations based on your pantry items.
 
 
 How to Use:
+
 1.) Clone the repository to your local machine.
 
 2.) Ensure you have Python installed (version 3.6 or above).
